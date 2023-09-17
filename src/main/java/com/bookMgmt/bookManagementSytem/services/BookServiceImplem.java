@@ -1,6 +1,7 @@
 package com.bookMgmt.bookManagementSytem.services;
 
 import com.bookMgmt.bookManagementSytem.Dao.BookDao;
+import com.bookMgmt.bookManagementSytem.Exception.BookNotFoundException;
 import com.bookMgmt.bookManagementSytem.entities.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,12 +39,12 @@ public class BookServiceImplem implements BookService{
 //                break;
 //            }
 //        }
-      System.out.println("The id is "+id);
       Optional<Book> byId = bookDao.findById(id);
-     if(byId.isEmpty()){
-       return null;
-     }
-     return byId.get();
+        if (byId.isEmpty()) {
+          throw new BookNotFoundException("The book with id : " + id + "was not found");
+        } else {
+          return byId.get();
+        }
     }
 
     @Override
