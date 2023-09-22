@@ -10,6 +10,6 @@ public class GlobalException {
 
 @ExceptionHandler(BookNotFoundException.class)
     public ResponseEntity<String> handleBookNotFound(BookNotFoundException e){
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book with given id not found"+e.getMessage());
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book with given id not found. "+e.getMessage());
 }
 }
